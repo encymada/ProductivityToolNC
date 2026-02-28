@@ -1,57 +1,91 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace ProductivityToolCLAVERIA
 {
     internal class Program
     {
-        static void Main(string[] args)
-
+            /*static List <TaskItem>tasks = new List<TaskItem>();        static void Main(string[] args)*/
         {
+            static void Main(string[]args){
 
             byte choice;
+            char tryAgain = 'Y';
 
             Console.WriteLine("------------- PRODUCTIVITY TOOL -------------");
 
             Console.WriteLine("[1] Add New Task");
-            Console.WriteLine("[2] Check Task Status");
+            Console.WriteLine("[2] Check/ Update Task Status");
             Console.WriteLine("[3] Edit Existing Tasks");
-            Console.WriteLine("[4] View all Tasks");
+            Console.WriteLine("[4] View All Tasks");
             Console.Write("Enter Choice: ");
             choice = Convert.ToByte(Console.ReadLine());
 
             switch (choice)
             {
                 case (1):
-                    Console.WriteLine("ADD NEW TASK: ");
-                    Console.WriteLine("ENTER TASK NAME: ");
-                    string taskName1 = Console.ReadLine();
-                    Console.WriteLine("ENTER TASK DESCRIPTION: ");
-                    string taskDesc1 = Console.ReadLine();
+                    AddTask();
                     break;
 
                 case (2):
-                    Console.WriteLine("CHECK TASK STATUS: ");
+                    UpdateTaskStatus();
                     break;
+                    /*Console.WriteLine("CHECK TASK STATUS: ");
+                    break;*/
                 
                 case (3):
-                    Console.WriteLine("EDIT EXISTING TASKS: ");
+                    EditTask();
+                    break;
+                    /*Console.WriteLine("EDIT EXISTING TASKS: ");
                     Console.WriteLine("ENTER TASK NAME: ");
                     Console.WriteLine("ENTER TASK DESCRIPTION: ");
-                    break;
+                    break;*/
 
                 case (4):
-                    Console.WriteLine("VIEW ALL EXISTING TASKS: ");
+                    ViewAllTask();
+                    break;
+                    /*Console.WriteLine("VIEW ALL EXISTING TASKS: ");
                     Console.WriteLine("ENTER TASK NAME: ");
-                    break;
-
-                default:
-                    Console.WriteLine("INCORRECT INPUT!!");
+                    break;*/
+                    /*Console.WriteLine("INCORRECT INPUT!!");
                     Environment.Exit(0);
-                    break;
-
-
+                    break;*/
             }
+
+            static void AddTask()
+                {
+                    Console.WriteLine("- ADD NEW TASK: ");
+                    Console.WriteLine("ENTER TASK NAME: ");
+                    string taskName1 = Console.ReadLine().ToUpper();
+                    Console.WriteLine("ENTER TASK DESCRIPTION: ");
+                    string taskDesc1 = Console.ReadLine().ToUpper();
+                    
+
+
+                }
+
+            static void UpdateTaskStatus()
+                {
+                    
+
+                    
+                }
+
+            static void EditTask()
+                {
+                    
+
+
+                }
+
+            static void ViewAllTask()
+                {
+                    
+
+
+                }
+
+            
 
 
 
@@ -59,3 +93,4 @@ namespace ProductivityToolCLAVERIA
         }
     }
 }
+
