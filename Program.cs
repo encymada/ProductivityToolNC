@@ -5,8 +5,7 @@ namespace ProductivityToolCLAVERIA
 {
     internal class Program
     {
-            /*static List <TaskItem>tasks = new List<TaskItem>();        static void Main(string[] args)*/
-        {
+            static List <TaskItem>tasks = new List<TaskItem>();      
             static void Main(string[]args){
 
             byte choice;
@@ -59,6 +58,9 @@ namespace ProductivityToolCLAVERIA
                     string taskName1 = Console.ReadLine().ToUpper();
                     Console.WriteLine("ENTER TASK DESCRIPTION: ");
                     string taskDesc1 = Console.ReadLine().ToUpper();
+
+                        tasks.Add(new TaskItem(taskName1,taskDesc1));
+                        System.Console.WriteLine("TASK ADDED SUCCESSFULLY!");
                     
 
 
@@ -94,3 +96,8 @@ namespace ProductivityToolCLAVERIA
     }
 }
 
+
+    class TaskItem
+{
+    
+}
