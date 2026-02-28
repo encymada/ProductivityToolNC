@@ -55,11 +55,11 @@ namespace ProductivityToolCLAVERIA
                 {
                     Console.WriteLine("- ADD NEW TASK: ");
                     Console.WriteLine("ENTER TASK NAME: ");
-                    string taskName1 = Console.ReadLine().ToUpper();
+                    string name = Console.ReadLine().ToUpper();
                     Console.WriteLine("ENTER TASK DESCRIPTION: ");
-                    string taskDesc1 = Console.ReadLine().ToUpper();
+                    string description = Console.ReadLine().ToUpper();
 
-                        tasks.Add(new TaskItem(taskName1,taskDesc1));
+                        tasks.Add(new TaskItem(name,description));
                         System.Console.WriteLine("TASK ADDED SUCCESSFULLY!");
                     
 
@@ -97,7 +97,11 @@ namespace ProductivityToolCLAVERIA
 }
 
 
-    class TaskItem
+class TaskItem
 {
-    
+    public string Name { get; set; }
+    public string Description { get; set; }
+
+    public TaskItem(string name, string description);
 }
+
