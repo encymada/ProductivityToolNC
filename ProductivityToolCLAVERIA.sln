@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36121.58 d17.14
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11605.240 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityToolCLAVERIA", "ProductivityToolCLAVERIA.csproj", "{31D475DE-C601-491D-AFD9-DA2920ECF3EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityToolAppService", "..\ProductivityToolAppService\ProductivityToolAppService.csproj", "{95D7E18B-F038-489D-856D-66B343C7BFB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityToolDataServices", "..\ProductivityToolDataServices\ProductivityToolDataServices.csproj", "{DB99BB7F-D2D1-494F-A0E6-D75E50BB1B79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductivityToolModels", "..\ProductivityToolModels\ProductivityToolModels.csproj", "{BE2DA48D-E042-4792-BB83-94B9CDB739F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{31D475DE-C601-491D-AFD9-DA2920ECF3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31D475DE-C601-491D-AFD9-DA2920ECF3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31D475DE-C601-491D-AFD9-DA2920ECF3EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D7E18B-F038-489D-856D-66B343C7BFB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D7E18B-F038-489D-856D-66B343C7BFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D7E18B-F038-489D-856D-66B343C7BFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D7E18B-F038-489D-856D-66B343C7BFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB99BB7F-D2D1-494F-A0E6-D75E50BB1B79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB99BB7F-D2D1-494F-A0E6-D75E50BB1B79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB99BB7F-D2D1-494F-A0E6-D75E50BB1B79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB99BB7F-D2D1-494F-A0E6-D75E50BB1B79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE2DA48D-E042-4792-BB83-94B9CDB739F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE2DA48D-E042-4792-BB83-94B9CDB739F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE2DA48D-E042-4792-BB83-94B9CDB739F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE2DA48D-E042-4792-BB83-94B9CDB739F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

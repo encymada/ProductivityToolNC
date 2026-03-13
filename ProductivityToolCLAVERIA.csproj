@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProductivityToolAppService\ProductivityToolAppService.csproj" />
+    <ProjectReference Include="..\ProductivityToolDataServices\ProductivityToolDataServices.csproj" />
+    <ProjectReference Include="..\ProductivityToolModels\ProductivityToolModels.csproj" />
+  </ItemGroup>
+
 </Project>
