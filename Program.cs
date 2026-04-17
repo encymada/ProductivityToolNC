@@ -13,7 +13,18 @@ namespace ProductivityToolCLAVERIA
             ProdToolDataServices dataService = new ProdToolDataServices();
             ProdToolAppService appService = new ProdToolAppService(dataService);
 
-            bool running = true;
+            //TaskService service = new TaskService();
+
+            //// JSON
+            //var tasks = service.LoadFromJson();
+
+            //// DATABASE
+            //service.InitializeDatabase();
+            //service.AddToDatabase(new TaskItem { Title = "Test Task", IsCompleted = false });
+
+            //var dbTasks = service.LoadFromDatabase();
+
+            //bool running = true;
 
             while (running)
             {

@@ -138,4 +138,34 @@ namespace ProductivityToolAppService
             return "Task deleted successfully.";
         }
     }
+    //public class TaskService
+    //{
+    //    private JsonTaskRepository jsonRepo = new JsonTaskRepository();
+    //    private DatabaseTaskRepository dbRepo = new DatabaseTaskRepository();
+
+    //    public List<TaskItem> LoadFromJson()
+    //    {
+    //        return jsonRepo.Load();
+    //    }
+
+    //    public void SaveToJson(List<TaskItem> tasks)
+    //    {
+    //        jsonRepo.Save(tasks);
+    //    }
+
+    //    public void InitializeDatabase()
+    //    {
+    //        dbRepo.Initialize();
+    //    }
+
+    //    public void AddToDatabase(TaskItem task)
+    //    {
+    //        dbRepo.Add(task);
+    //    }
+
+    //    public List<TaskItem> LoadFromDatabase()
+    //    {
+    //        return dbRepo.GetAll();
+    //    }
+    //}
 }
