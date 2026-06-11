@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -8,5 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ProductivityToolModels\ProductivityToolModels.csproj" />
     <ProjectReference Include="..\ProductivityToolDataServices\ProductivityToolDataServices.csproj" />
+    <ProjectReference Include="..\ProductivityToolAppService\ProductivityToolAppService.csproj" />
   </ItemGroup>
 </Project>

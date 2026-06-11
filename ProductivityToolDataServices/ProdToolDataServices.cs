@@ -1,54 +1,117 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Data.Sqlite;
 using ProductivityToolModels;
-
 
 namespace ProductivityToolDataServices
 {
     public class ProdToolDataServices
     {
-        private List<ProdToolModels> tasks = new List<ProdToolModels>();
+        private const string ConnectionString = "Data Source=productivity.db";
 
-        public void AddTask(ProdToolModels task)
+        public ProdToolDataServices()
         {
-            tasks.Add(task);
+            InitializeDatabase();
         }
 
+        // ── Schema ────────────────────────────────────────────────────────────
+        private void InitializeDatabase()
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText =
+            @"CREATE TABLE IF NOT EXISTS Tasks (
+                Id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                Name        TEXT    NOT NULL UNIQUE,
+                Description TEXT    NOT NULL,
+                Status      TEXT    NOT NULL DEFAULT 'PENDING'
+            );";
+            cmd.ExecuteNonQuery();
+        }
+
+        // ── Create ────────────────────────────────────────────────────────────
+        public void AddTask(ProdToolModels task)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText =
+            @"INSERT INTO Tasks (Name, Description, Status)
+              VALUES ($name, $description, $status)";
+            cmd.Parameters.AddWithValue("$name",        task.Name);
+            cmd.Parameters.AddWithValue("$description", task.Description);
+            cmd.Parameters.AddWithValue("$status",      task.Status);
+            cmd.ExecuteNonQuery();
+        }
+
+        // ── Read All ──────────────────────────────────────────────────────────
         public List<ProdToolModels> GetAllTasks()
         {
+            var tasks = new List<ProdToolModels>();
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT Name, Description, Status FROM Tasks ORDER BY Id";
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                tasks.Add(new ProdToolModels(reader.GetString(0), reader.GetString(1))
+                {
+                    Status = reader.GetString(2)
+                });
+            }
             return tasks;
         }
 
-        public ProdToolModels GetTaskByName(string name)
+        // ── Read One ──────────────────────────────────────────────────────────
+        public ProdToolModels? GetTaskByName(string name)
         {
-            return tasks.FirstOrDefault(t => t.Name == name.ToUpper());
-        }
-
-        public bool UpdateTask(ProdToolModels updatedTask)
-        {
-            ProdToolModels existingTask = GetTaskByName(updatedTask.Name);
-
-            if (existingTask == null)
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText =
+            @"SELECT Name, Description, Status FROM Tasks
+              WHERE Name = $name";
+            cmd.Parameters.AddWithValue("$name", name.ToUpper());
+            using var reader = cmd.ExecuteReader();
+            if (reader.Read())
             {
-                return false;
+                return new ProdToolModels(reader.GetString(0), reader.GetString(1))
+                {
+                    Status = reader.GetString(2)
+                };
             }
-
-            existingTask.Description = updatedTask.Description;
-            existingTask.Status = updatedTask.Status;
-            return true;
+            return null;
         }
 
+        // ── Update ────────────────────────────────────────────────────────────
+        // oldName is required to correctly handle renames
+        public bool UpdateTask(string oldName, ProdToolModels updatedTask)
+        {
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText =
+            @"UPDATE Tasks
+              SET Name        = $newName,
+                  Description = $description,
+                  Status      = $status
+              WHERE Name = $oldName";
+            cmd.Parameters.AddWithValue("$oldName",     oldName.ToUpper());
+            cmd.Parameters.AddWithValue("$newName",     updatedTask.Name);
+            cmd.Parameters.AddWithValue("$description", updatedTask.Description);
+            cmd.Parameters.AddWithValue("$status",      updatedTask.Status);
+            return cmd.ExecuteNonQuery() > 0;
+        }
+
+        // ── Delete ────────────────────────────────────────────────────────────
         public bool DeleteTask(string name)
         {
-            ProdToolModels task = GetTaskByName(name);
-
-            if (task == null)
-            {
-                return false;
-            }
-
-            tasks.Remove(task);
-            return true;
+            using var conn = new SqliteConnection(ConnectionString);
+            conn.Open();
+            var cmd = conn.CreateCommand();
+            cmd.CommandText = "DELETE FROM Tasks WHERE Name = $name";
+            cmd.Parameters.AddWithValue("$name", name.ToUpper());
+            return cmd.ExecuteNonQuery() > 0;
         }
     }
 }
