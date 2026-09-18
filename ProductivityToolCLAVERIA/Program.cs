@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using ProductivityToolModels;
 using ProductivityToolDataServices;
 using ProductivityToolAppService;
@@ -11,9 +12,15 @@ namespace ProductivityToolCLAVERIA
         static void Main(string[] args)
         {
 
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            EmailService emailService = new EmailService(configuration);
 
             ProdToolDataServices dataService = new ProdToolDataServices();
-            ProdToolAppService   appService  = new ProdToolAppService(dataService);
+            ProdToolAppService appService = new ProdToolAppService(dataService, emailService);
 
             bool running = true;
 
@@ -65,7 +72,10 @@ namespace ProductivityToolCLAVERIA
             Console.Write("Enter Task Description: ");
             string description = Console.ReadLine() ?? "";
 
-            Console.WriteLine(appService.AddTask(name, description));
+            Console.Write("Enter Email Address: ");
+            string email = Console.ReadLine() ?? "";
+
+            Console.WriteLine(appService.AddTask(name, description, email));
         }
 
         // ── Update Status ─────────────────────────────────────────────────────

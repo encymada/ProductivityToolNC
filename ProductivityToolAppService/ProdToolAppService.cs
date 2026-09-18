@@ -6,14 +6,18 @@ namespace ProductivityToolAppService
     public class ProdToolAppService
     {
         private readonly ProdToolDataServices dataService;
+        private readonly EmailService emailService;
 
-        public ProdToolAppService(ProdToolDataServices dataService)
+        public ProdToolAppService(
+            ProdToolDataServices dataService,
+            EmailService emailService)
         {
             this.dataService = dataService;
+            this.emailService = emailService;
         }
 
         // ── Add ───────────────────────────────────────────────────────────────
-        public string AddTask(string name, string description)
+        public string AddTask(string name, string description, string email)
         {
             if (string.IsNullOrWhiteSpace(name))
                 return "Task name cannot be empty.";
@@ -21,11 +25,17 @@ namespace ProductivityToolAppService
             if (string.IsNullOrWhiteSpace(description))
                 return "Task description cannot be empty.";
 
+            if (string.IsNullOrWhiteSpace(email))
+                return "Email address cannot be empty.";
+
             if (dataService.GetTaskByName(name) != null)
                 return "Task already exists.";
 
             dataService.AddTask(new ProdToolModels(name, description));
-            return "Task added successfully.";
+
+            emailService.SendEmail(email, name, description);
+
+            return "Task added successfully and email notification sent.";
         }
 
         // ── Update Status ─────────────────────────────────────────────────────
